@@ -2,10 +2,8 @@ package com.example.bookstore.model;
 
 import lombok.*;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table
@@ -13,6 +11,9 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@Entity(name = "bookOrder")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order {
 
     @Id
@@ -20,7 +21,11 @@ public class Order {
     private Integer id;
 
     private String userName;
-    private List<Integer> bookList;
+
+    @Column
+    @ElementCollection(targetClass = Integer.class)
+    private List<Integer> bookList = new ArrayList<>();
+
     private Double totalPrice;
 
 }

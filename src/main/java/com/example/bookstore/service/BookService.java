@@ -2,9 +2,11 @@ package com.example.bookstore.service;
 
 import com.example.bookstore.model.Book;
 import com.example.bookstore.repository.BookRepository;
+import org.apache.catalina.LifecycleState;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,5 +22,8 @@ public class BookService {
         return bookRepository.findById(bookId);
     }
 
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
+    }
 
 }

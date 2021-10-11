@@ -1,18 +1,19 @@
 package com.example.bookstore.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Table
-@Data
+@ToString
+@RequiredArgsConstructor
 @Getter
 @Setter
+@Builder
+@Entity
+@AllArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,5 +22,6 @@ public class Book {
     private String author;
     private Double price;
     private Integer stock;
+
 
 }
