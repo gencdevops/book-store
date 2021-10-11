@@ -1,16 +1,16 @@
-FROM alpine:3.12
+FROM openjdk:11
 
 LABEL "maintainer"="Gencdevops <gencdevops> "
 LABEL "description"="Book Store App"
 
-RUN apk update && \
-    apk add openjdk11
+WORKDIR /app
 
-ARG APP=app.jar
-ENV APPDIR /app
-WORKDIR ${APPDIR}
+COPY pom.xml mvnw ./
+COPY .mvn .mvn
+RUN ./mvnw dependency:resolve
 
+COPY src src
+RUN ./mvnw package
 
-ADD target/book-store-0.0.1-SNAPSHOT.jar ${APP}
-
-CMD ["java", "-jar", "app.jar"]
+COPY target/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
